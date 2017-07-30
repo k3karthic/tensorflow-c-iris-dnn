@@ -49,10 +49,10 @@ int main() {
 
   const float input_row[4] = {6.4f, 3.2f, 4.5f, 1.5f};
   const int64_t input_dims[2] = {1, 4};
-  auto input_tensor =
-      FloatTensor((const int64_t *)&input_dims, 2, (const float *)&input_row);
+  auto input_tensor = FloatTensor(input_dims, 2, input_row);
 
-  inputs.get()[0] = TF_Output{TF_GraphOperationByName(graph, "InputData/X"), 0};
+  inputs.get()[0] =
+      TF_Output{TF_GraphOperationByName(graph, "inplaytest/X"), 0};
 
   if (TF_GetCode(status) != TF_OK) {
     std::cerr << "Unable to fetch input operation: " << TF_Message(status)
@@ -64,10 +64,10 @@ int main() {
 
   const float output_row[3] = {0, 0, 0};
   const int64_t output_dims[2] = {1, 3};
-  auto output_tensor =
-      FloatTensor((const int64_t *)&output_dims, 2, (const float *)&output_row);
+  auto output_tensor = FloatTensor(output_dims, 2, output_row);
 
-  outputs.get()[0] = TF_Output{TF_GraphOperationByName(graph, "Top_3"), 0};
+  outputs.get()[0] =
+      TF_Output{TF_GraphOperationByName(graph, "FullyConnected_2/Softmax"), 0};
 
   output_values.get()[0] = output_tensor;
 
